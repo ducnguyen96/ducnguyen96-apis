@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { contextMiddleware } from './middlewares/context.middleware';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './modules/auth/auth.module';
       isGlobal: true,
     }),
     AuthModule,
+    ChatModule,
     TypeOrmModule.forRootAsync({
       imports: [SharedModule],
       useFactory: (configService: ApiConfigService) =>
@@ -35,7 +37,7 @@ import { AuthModule } from './modules/auth/auth.module';
         },
         playground: true,
         debug: false,
-        installSubscriptionHandlers: true,
+        installSubscriptionHandlers: false,
         autoSchemaFile: true,
         schemaDirectives: {
           upper: UpperCaseDirective,

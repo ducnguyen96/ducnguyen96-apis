@@ -3,7 +3,7 @@ import { UserRegisterInput } from 'src/modules/auth/dto/UserRegister.input';
 import { FindConditions } from 'typeorm';
 import { UserEntity } from '../entities/users.entity';
 import { UserRepository } from '../repositories/users.repository';
-
+import bcrypt from 'bcryptjs';
 @Injectable()
 export class UsersService {
   constructor(public readonly userRepository: UserRepository) {}
@@ -29,7 +29,10 @@ export class UsersService {
       throw new ForbiddenException('Username has been used !');
     }
 
-    const user = this.userRepository.create();
+    const user = this.userRepository.create({ ...userRegisterInput });
+    const salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(userRegisterInput.password, salt);
+    user.passwordSalt = salt;
     return this.userRepository.save(user);
   }
 }

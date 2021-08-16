@@ -10,7 +10,9 @@ const PORT = parseInt(process.env.PORT ?? '3001', 10);
 process.env.TZ = 'GMT';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    cors: true,
+    cors: {
+      origin: ['/.*localhost.*/', 'http://127.0.0.1:8080'],
+    },
     bodyParser: true,
   });
 
@@ -33,7 +35,12 @@ async function bootstrap() {
   );
 
   app.use(json({ limit: '5mb' })); //The default limit defined by body-parser is 100kb
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy:
+        process.env.NODE_ENV === 'production' ? undefined : false,
+    }),
+  );
   app.use(compression());
 
   await app.listen(PORT);

@@ -7,3 +7,11 @@ export enum GENDER {
 registerEnumType(GENDER, {
   name: 'GENDER',
 });
+
+export enum NAMESPACE {
+  TECH = 'TECH',
+  MUSIC = 'MUSIC',
+}
+registerEnumType(NAMESPACE, {
+  name: 'NAMESPACE',
+});

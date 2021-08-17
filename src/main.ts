@@ -11,7 +11,11 @@ process.env.TZ = 'GMT';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
-      origin: ['/.*localhost.*/', 'http://127.0.0.1:8080'],
+      origin: [
+        /http:\/\/localhost.*/,
+        /http:\/\/127.0.0.1.*/,
+        /https:\/\/ducnguyen96.github.io/,
+      ],
     },
     bodyParser: true,
   });

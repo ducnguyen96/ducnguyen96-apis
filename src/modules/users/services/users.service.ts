@@ -15,7 +15,7 @@ export class UsersService {
 
   async createUser(userRegisterInput: UserRegisterInput): Promise<UserEntity> {
     const { username, password, repeatPassword } = userRegisterInput;
-
+    console.log(userRegisterInput);
     if (password !== repeatPassword) {
       throw new ForbiddenException(
         'Password and repeat password are differnet !',

@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ApiConfigService } from 'src/shared/services/api-config.service';
 import { UsersModule } from '../users/users.module';
 import { MainGateway, MusicGateway, TechGateway } from './chat.gateways';
 import {
@@ -15,6 +17,16 @@ import { RoomService } from './services/room.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([RoomRepository, MessageRepository]),
+    JwtModule.registerAsync({
+      useFactory: (configService: ApiConfigService) => ({
+        secretOrPrivateKey: configService.authConfig.jwtSecret,
+        // if you want to use token with expiration date
+        // signOptions: {
+        //     expiresIn: configService.getNumber('JWT_EXPIRATION_TIME'),
+        // },
+      }),
+      inject: [ApiConfigService],
+    }),
     UsersModule,
   ],
   providers: [

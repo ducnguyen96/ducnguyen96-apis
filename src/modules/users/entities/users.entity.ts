@@ -23,9 +23,17 @@ export class UserEntity implements Node {
   })
   id: string;
 
-  @Field(() => String, { nullable: true })
-  @Column({ length: 50, name: 'username', nullable: true })
+  @Field(() => String, { nullable: false })
+  @Column({ length: 50, name: 'username', nullable: false })
   username: string;
+
+  @Field(() => String, { nullable: false })
+  @Column({
+    name: 'avatar',
+    nullable: false,
+    default: 'https://robohash.org/honey?set=set1',
+  })
+  avatar: string;
 
   @HideField()
   @Column({ nullable: true, name: 'password' })

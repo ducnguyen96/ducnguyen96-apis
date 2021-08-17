@@ -12,15 +12,15 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
       origin: [
-        /http:\/\/localhost.*/,
-        /http:\/\/127.0.0.1.*/,
-        /https:\/\/ducnguyen96.github.io/,
+        /https:\/\/ducnguyen96.github.io.*/,
+        /.*.cloudflare.com.*/,
+        /.*ducnguyen96.xyz.*/,
       ],
     },
     bodyParser: true,
   });
 
-  app.setGlobalPrefix('api/v1');
+  // app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

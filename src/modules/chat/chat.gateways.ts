@@ -110,7 +110,7 @@ export class MusicGateway {
   }
 }
 
-@WebSocketGateway(3003, { namespace: 'tech' })
+@WebSocketGateway(3002, { namespace: 'tech' })
 export class TechGateway {
   constructor(
     private readonly jwtService: JwtService,

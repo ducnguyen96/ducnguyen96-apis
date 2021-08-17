@@ -37,3 +37,4 @@ lerna-debug.log*
 
 # projects
 /simpchat
+docker-compose.yml

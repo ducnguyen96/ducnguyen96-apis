@@ -39,7 +39,7 @@ async function bootstrap() {
   );
 
   app.use(json({ limit: '5mb' })); //The default limit defined by body-parser is 100kb
-  app.use(helmet());
+  // app.use(helmet());
   app.use(
     helmet({
       contentSecurityPolicy:

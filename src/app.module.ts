@@ -3,7 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UpperCaseDirective } from './graphql/directives/UpperCaseDirective';
+// import { UpperCaseDirective } from './graphql/directives/UpperCaseDirective';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from '@nestjs/config';
@@ -35,13 +35,13 @@ import { ChatModule } from './modules/chat/chat.module';
           maxFileSize: 50 * 1000000, // 50 MB
           maxFiles: 20,
         },
-        playground: false,
+        playground: true,
         debug: false,
         installSubscriptionHandlers: false,
         autoSchemaFile: true,
-        schemaDirectives: {
-          upper: UpperCaseDirective,
-        },
+        // schemaDirectives: {
+        //   upper: UpperCaseDirective,
+        // },
         context: ({ req, res, payload, connection }: any) => ({
           req,
           res,

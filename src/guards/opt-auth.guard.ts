@@ -3,7 +3,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { ExtractJwt } from 'passport-jwt';
 import { GraphQLContext } from 'src/graphql/interfaces/graphql.interface';
-import { AuthenticationError } from 'apollo-server-express';
+import { AuthenticationError } from 'apollo-server';
 
 @Injectable()
 export class OptAuthGuard extends AuthGuard('jwt') {

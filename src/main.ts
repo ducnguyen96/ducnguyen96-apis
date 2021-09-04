@@ -13,7 +13,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
       origin: [
-        /http:\/\/localhost.*/,
         /https:\/\/ducnguyen96.github.io.*/,
         /.*.cloudflare.com.*/,
         /.*ducnguyen96.xyz.*/,
@@ -49,6 +48,7 @@ async function bootstrap() {
   );
 
   app.use(json({ limit: '5mb' })); //The default limit defined by body-parser is 100kb
+  app.use(helmet());
   app.use(
     helmet({
       contentSecurityPolicy:

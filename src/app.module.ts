@@ -11,6 +11,7 @@ import { contextMiddleware } from './middlewares/context.middleware';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ChatModule } from './modules/chat/chat.module';
     }),
     AuthModule,
     ChatModule,
+    NotificationModule,
     TypeOrmModule.forRootAsync({
       imports: [SharedModule],
       useFactory: (configService: ApiConfigService) =>
@@ -35,7 +37,7 @@ import { ChatModule } from './modules/chat/chat.module';
           maxFileSize: 50 * 1000000, // 50 MB
           maxFiles: 20,
         },
-        playground: true,
+        playground: false,
         debug: false,
         installSubscriptionHandlers: false,
         autoSchemaFile: true,

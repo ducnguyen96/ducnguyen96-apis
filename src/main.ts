@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { json } from 'body-parser';
 import helmet from 'helmet';
 import compression from 'compression';
+import * as admin from 'firebase-admin';
 
 const PORT = parseInt(process.env.PORT ?? '3001', 10);
 process.env.TZ = 'GMT';
@@ -18,6 +19,14 @@ async function bootstrap() {
       ],
     },
     bodyParser: true,
+  });
+
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      clientEmail: process.env.client_email,
+      privateKey: process.env.private_key?.replace(/\\n/g, '\n'),
+      projectId: process.env.project_id,
+    }),
   });
 
   // app.setGlobalPrefix('api/v1');
@@ -39,7 +48,7 @@ async function bootstrap() {
   );
 
   app.use(json({ limit: '5mb' })); //The default limit defined by body-parser is 100kb
-  // app.use(helmet());
+  app.use(helmet());
   app.use(
     helmet({
       contentSecurityPolicy:

@@ -6,11 +6,8 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
-  WsResponse,
 } from '@nestjs/websockets';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Server, Socket } from 'socket.io';
+import { Server, Socket } from '@nestjs/platform-socket.io/node_modules/socket.io';
 import { UsersService } from '../users/services/users.service';
 import { MessageService } from './services/message.service';
 import { RoomService } from './services/room.service';
